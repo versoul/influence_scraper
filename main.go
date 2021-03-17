@@ -8,7 +8,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-const HOST = "localhost:9090"
+const HOST = ":9090"
 
 func main() {
 	r := gin.Default()
@@ -18,7 +18,7 @@ func main() {
 
 	r.Use(static.Serve("/", static.LocalFile("./static", true)))
 	r.NoRoute(func(c *gin.Context) {
-		c.File("./web/static/index.html")
+		c.File("./static/index.html")
 	})
 
 	log.WithFields(log.Fields{

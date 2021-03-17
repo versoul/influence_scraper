@@ -34,11 +34,10 @@ FROM alpine
 # make the root folder the current working directory
 WORKDIR /
 # Copy our static vue-js build
-COPY --from=build-vuejs /src/static-src/dist ./influence_scraper/static
+COPY --from=build-vuejs /src/static-src/dist ./static
 # Copy our static executable.
 COPY --from=build-golang /go/bin/influence_scraper ./influence_scraper
 # Expose port for the webserver
 EXPOSE 9090
 # Run the influence_scraper binary
-RUN ["chmod", "+x", "/influence_scraper"]
 ENTRYPOINT ["/influence_scraper"]
