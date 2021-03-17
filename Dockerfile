@@ -4,7 +4,7 @@
 FROM node:lts-alpine AS build-vuejs
 # copy code into container
 COPY . /src
-# make the 'quiz-static' folder the current working directory
+# make the 'static-src' folder the current working directory
 WORKDIR /src/static-src
 # install project dependencies and build
 RUN yarn install && yarn build
@@ -34,10 +34,11 @@ FROM alpine
 # make the root folder the current working directory
 WORKDIR /
 # Copy our static vue-js build
-COPY --from=build-vuejs /src/influence_scraper/dist ./influence_scraper/dist
+COPY --from=build-vuejs /src/static-src/dist ./influence_scraper/static
 # Copy our static executable.
-COPY --from=build-golang /go/bin/influence_acraper ./influence_scraper
+COPY --from=build-golang /go/bin/influence_scraper ./influence_scraper
 # Expose port for the webserver
 EXPOSE 9090
 # Run the influence_scraper binary
+RUN ["chmod", "+x", "/influence_scraper"]
 ENTRYPOINT ["/influence_scraper"]

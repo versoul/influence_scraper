@@ -20,7 +20,7 @@ Type the following command to run the docker image:
 docker run -d -p 9090:9090 influence_scraper
 ```
 
-To access the quiz-server open http://<ip>:9090 where <ip> is the ip address of the docker host.
+To access the server open http://<ip>:9090 where <ip> is the ip address of the docker host.
 
 ###Job to be done
 
